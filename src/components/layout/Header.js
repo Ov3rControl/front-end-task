@@ -3,7 +3,7 @@ import { Navbar } from 'react-bootstrap';
 function Header() {
   return (
     <header>
-      <Navbar fixed="top" bg="dark" variant="dark">
+      <Navbar style={navbar} fixed="top" variant="dark">
         <Navbar.Brand href="#home">
           <img
             alt=""
@@ -17,5 +17,7 @@ function Header() {
     </header>
   );
 }
-
+const navbar = {
+  background: 'rgba(0, 0, 0, 0.8)'
+};
 export default Header;
