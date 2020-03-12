@@ -1,7 +1,16 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import Moment from 'react-moment';
 
-function SessionModal(props) {
+const SessionModal = props => {
+  const {
+    name,
+    stage,
+    startingTime,
+    endingTime,
+    description,
+    speakers
+  } = props.data;
   return (
     <Modal
       {...props}
@@ -10,34 +19,33 @@ function SessionModal(props) {
       centered
     >
       <Modal.Header style={headerContainer}>
-        <h3 style={headerLabel}>The Best Event Ever</h3>
+        <h3 style={headerLabel}>{name}</h3>
         <ul style={labelIconsContainer}>
           <li style={labelIcons}>
-            <i class="fa fa-clock-o"></i> 13:25 - 14:00
+            <i class="fa fa-clock-o"></i>
+            <Moment format="LT">{startingTime}</Moment> {' - '}
+            <Moment format="LT">{endingTime}</Moment>
           </li>
           <li style={labelIcons}>
-            <i class="fa fa-map-marker"></i> Creative Stage
+            <i class="fa fa-map-marker"></i> {stage.name}
           </li>
         </ul>
       </Modal.Header>
       <Modal.Body>
         <h6 style={speakersTitleLabel}>Session Speaker</h6>
         <hr style={speakersSeperator}></hr>
-        <label style={speakersLabel}>Mohamed Adel</label>
-        <label style={speakersLabel}>Mohamed Adel</label>
+        {speakers.map(speakers => (
+          <label style={speakersLabel}>{speakers.name}</label>
+        ))}
         <hr style={descriptionSeperator}></hr>
-        <label style={descriptionLabel}>
-          Time to introduce Excuse My Content's new venture. SYNC is here to
-          change the idea of creativity and answer the age old question of "how
-          do I break into the creative field?"
-        </label>
+        <label style={descriptionLabel}>{description}</label>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Done</Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
 const headerLabel = {
   color: '#254d9f',
   textTransform: 'uppercase',

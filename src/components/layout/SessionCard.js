@@ -1,15 +1,21 @@
 import React from 'react';
-import { CardColumns, Card, Container, ButtonToolbar } from 'react-bootstrap';
+import { CardColumns, Card, Container } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import SessionModal from './Modal';
-
 export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
+  const [sessionId, setSessionId] = React.useState([]);
   const sessionData = props.data.map(session => (
     <div key={session._id}>
       {/* eslint-disable-next-line */}
-      <a style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)}>
+      <a
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          setSessionId(session);
+          setModalShow(true);
+        }}
+      >
         <Card>
           <div>
             <Card.Img
@@ -55,12 +61,14 @@ export const SessionCard = props => {
   ));
   return (
     <CardColumns>
-      <Container>
-        {sessionData}
-        <ButtonToolbar>
-          <SessionModal show={modalShow} onHide={() => setModalShow(false)} />
-        </ButtonToolbar>
-      </Container>
+      <Container>{sessionData}</Container>
+      {modalShow && (
+        <SessionModal
+          show={modalShow}
+          data={sessionId}
+          onHide={() => setModalShow(false)}
+        />
+      )}
     </CardColumns>
   );
 };
