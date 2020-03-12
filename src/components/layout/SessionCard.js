@@ -3,6 +3,9 @@ import { CardColumns, Card, Container } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import SessionModal from './Modal';
+const generateRandomColor = () => {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+};
 export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
   const [sessionId, setSessionId] = React.useState([]);
@@ -49,7 +52,18 @@ export const SessionCard = props => {
 
             <div style={tagContainer}>
               {session.tags.map(tags => (
-                <div key={tags._id} style={tag}>
+                <div
+                  key={tags._id}
+                  style={{
+                    padding: 5,
+                    borderRadius: 4,
+                    margin: '2%',
+                    textAlign: 'center',
+                    fontWeight: 500,
+                    textTransform: 'uppercase',
+                    backgroundColor: generateRandomColor()
+                  }}
+                >
                   <label>{tags.name}</label>
                 </div>
               ))}
@@ -80,13 +94,7 @@ const cardFooter = {
   flexWrap: 'wrap',
   overflow: 'hidden'
 };
-const tag = {
-  backgroundColor: 'deepskyblue',
-  padding: 5,
-  borderRadius: 4,
-  margin: '2%',
-  textAlign: 'center'
-};
+
 const tagContainer = {
   display: 'flex',
   flexDirection: 'row'
@@ -105,7 +113,8 @@ const stageTag = {
   backgroundColor: '#FBE002',
   padding: 5,
   borderRadius: 4,
-  textAlign: 'center'
+  textAlign: 'center',
+  fontWeight: 500
 };
 const dayTagContainer = {
   position: 'absolute',
@@ -114,10 +123,11 @@ const dayTagContainer = {
   margin: '2%'
 };
 const dayTag = {
-  backgroundColor: 'green',
+  backgroundColor: '#297eff',
   padding: 5,
   borderRadius: 4,
-  textAlign: 'center'
+  textAlign: 'center',
+  fontWeight: 500
 };
 const speakersLabel = {
   fontWeight: 600
