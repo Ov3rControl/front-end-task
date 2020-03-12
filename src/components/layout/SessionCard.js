@@ -1,59 +1,66 @@
 import React from 'react';
 import { CardColumns, Card, Container, ButtonToolbar } from 'react-bootstrap';
+
 import SessionModal from './Modal';
 
-function SessionCard() {
+export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
+  const sessionData = props.data.map(session => (
+    <div key={session._id}>
+      {/* eslint-disable-next-line */}
+      <a style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)}>
+        <Card>
+          <div>
+            <Card.Img
+              variant="top"
+              src="https://pbs.twimg.com/profile_images/907567664465371136/7FwiQlFu.jpg"
+            />
+            <div style={stageTagContainer}>
+              <div style={stageTag}>
+                <label>{session.stage.name}</label>
+              </div>
+            </div>
+            <div style={dayTagContainer}>
+              <div style={dayTag}>
+                <label>{session.day.name}</label>
+              </div>
+            </div>
+          </div>
+          <Card.Body>
+            <Card.Title>{session.name}</Card.Title>
+            <Card.Text style={speakersLabel}>
+              {session.speakers.map(speakers => speakers.name + ',')}
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer style={cardFooter}>
+            <label style={timeFeild}>
+              {session.startingTime + ' - ' + session.endingTime}
+            </label>
 
+            <div style={tagContainer}>
+              {session.tags.map(tags => (
+                <div style={tag}>
+                  <label>{tags.name}</label>
+                </div>
+              ))}
+            </div>
+          </Card.Footer>
+        </Card>
+      </a>
+    </div>
+  ));
   return (
     <CardColumns>
       <Container>
-        {/* eslint-disable-next-line */}
-        <a style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)}>
-          <Card>
-            <div>
-              <Card.Img
-                variant="top"
-                src="https://pbs.twimg.com/profile_images/907567664465371136/7FwiQlFu.jpg"
-              />
-              <div style={stageTagContainer}>
-                <div style={stageTag}>
-                  <label>AUC Stage</label>
-                </div>
-              </div>
-              <div style={dayTagContainer}>
-                <div style={dayTag}>
-                  <label>18 March 2020</label>
-                </div>
-              </div>
-            </div>
-            <Card.Body>
-              <Card.Title>The Best Event Ever</Card.Title>
-              <Card.Text style={speakersLabel}>
-                Mohamed Ahmed, Mohamed Adel, Mohamed Adel
-              </Card.Text>
-            </Card.Body>
-            <Card.Footer style={cardFooter}>
-              <label style={timeFeild}>18:00 - 18:35</label>
-
-              <div style={tagContainer}>
-                <div style={tag}>
-                  <label>TECH</label>
-                </div>
-                <div style={tag}>
-                  <label>GAMING</label>
-                </div>
-              </div>
-            </Card.Footer>
-          </Card>
-        </a>
+        {sessionData}
         <ButtonToolbar>
           <SessionModal show={modalShow} onHide={() => setModalShow(false)} />
         </ButtonToolbar>
       </Container>
     </CardColumns>
   );
-}
+};
+
 const cardFooter = {
   display: 'flex',
   flexDirection: 'row',
@@ -103,4 +110,5 @@ const dayTag = {
 const speakersLabel = {
   fontWeight: 600
 };
+
 export default SessionCard;
