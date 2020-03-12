@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardColumns, Card, Container, ButtonToolbar } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 import SessionModal from './Modal';
 
@@ -22,7 +23,9 @@ export const SessionCard = props => {
             </div>
             <div style={dayTagContainer}>
               <div style={dayTag}>
-                <label>{session.day.name}</label>
+                <label>
+                  <Moment format="D MMM YYYY">{session.day.name}</Moment>
+                </label>
               </div>
             </div>
           </div>
@@ -34,7 +37,8 @@ export const SessionCard = props => {
           </Card.Body>
           <Card.Footer style={cardFooter}>
             <label style={timeFeild}>
-              {session.startingTime + ' - ' + session.endingTime}
+              <Moment format="LT">{session.startingTime}</Moment> {' - '}
+              <Moment format="LT">{session.endingTime}</Moment>
             </label>
 
             <div style={tagContainer}>
