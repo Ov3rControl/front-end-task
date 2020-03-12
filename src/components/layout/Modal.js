@@ -37,7 +37,9 @@ const SessionModal = props => {
           <h6 style={speakersTitleLabel}>Session Speaker</h6>
           <hr style={speakersSeperator}></hr>
           {speakers.map(speakers => (
-            <label style={speakersLabel}>{speakers.name}</label>
+            <label key={speakers._id} style={speakersLabel}>
+              {speakers.name}
+            </label>
           ))}
           <hr style={descriptionSeperator}></hr>
           <label style={descriptionLabel}>{description}</label>
