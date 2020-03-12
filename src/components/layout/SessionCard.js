@@ -1,10 +1,15 @@
 import React from 'react';
-import { CardColumns, Card, Container } from 'react-bootstrap';
+import { CardColumns, Card, Container, ButtonToolbar } from 'react-bootstrap';
+import SessionModal from './Modal';
+
 function SessionCard() {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <CardColumns>
       <Container>
-        <a style={{ cursor: 'pointer' }} onClick={() => alert('')}>
+        {/* eslint-disable-next-line */}
+        <a style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)}>
           <Card>
             <div>
               <Card.Img
@@ -42,6 +47,9 @@ function SessionCard() {
             </Card.Footer>
           </Card>
         </a>
+        <ButtonToolbar>
+          <SessionModal show={modalShow} onHide={() => setModalShow(false)} />
+        </ButtonToolbar>
       </Container>
     </CardColumns>
   );
