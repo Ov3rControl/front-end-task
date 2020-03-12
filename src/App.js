@@ -4,7 +4,7 @@ import './App.css';
 import store from './store';
 import Header from './components/layout/Header';
 import Hero from './components/layout/Hero';
-import Sessions from './components/layout/Sessions';
+import Sessions from './components/Sessions';
 import Footer from './components/layout/Footer';
 
 class App extends Component {

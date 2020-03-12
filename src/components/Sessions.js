@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchSessions } from '../../actions/sessionActions';
-import SessionCard from './SessionCard';
+import { fetchSessions } from '../actions/sessionActions';
+import SessionCard from './layout/SessionCard';
 
 class Sessions extends Component {
   componentDidMount() {
