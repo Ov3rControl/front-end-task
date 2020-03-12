@@ -1,0 +1,5 @@
+/* overriding default label  */
+label {
+  display: inline;
+  margin-bottom: 0px;
+}
