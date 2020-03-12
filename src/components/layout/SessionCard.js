@@ -3,9 +3,6 @@ import { CardColumns, Card, Container } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import SessionModal from './Modal';
-const generateRandomColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
 export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
   const [sessionId, setSessionId] = React.useState([]);
@@ -52,18 +49,7 @@ export const SessionCard = props => {
 
             <div style={tagContainer}>
               {session.tags.map(tags => (
-                <div
-                  key={tags._id}
-                  style={{
-                    padding: 5,
-                    borderRadius: 4,
-                    margin: '2%',
-                    textAlign: 'center',
-                    fontWeight: 500,
-                    textTransform: 'uppercase',
-                    backgroundColor: generateRandomColor()
-                  }}
-                >
+                <div key={tags._id} style={tag}>
                   <label>{tags.name}</label>
                 </div>
               ))}
@@ -86,7 +72,6 @@ export const SessionCard = props => {
     </CardColumns>
   );
 };
-
 const cardFooter = {
   display: 'flex',
   flexDirection: 'row',
@@ -94,7 +79,15 @@ const cardFooter = {
   flexWrap: 'wrap',
   overflow: 'hidden'
 };
-
+const tag = {
+  backgroundColor: 'pink',
+  padding: 5,
+  borderRadius: 4,
+  margin: '2%',
+  textAlign: 'center',
+  fontWeight: 500,
+  textTransform: 'uppercase'
+};
 const tagContainer = {
   display: 'flex',
   flexDirection: 'row'
