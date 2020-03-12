@@ -49,7 +49,7 @@ export const SessionCard = props => {
 
             <div style={tagContainer}>
               {session.tags.map(tags => (
-                <div style={tag}>
+                <div key={tags._id} style={tag}>
                   <label>{tags.name}</label>
                 </div>
               ))}
