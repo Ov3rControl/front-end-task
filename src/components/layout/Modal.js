@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 
 const SessionModal = props => {
   const {
+    _id,
     name,
     stage,
     startingTime,
@@ -18,31 +19,33 @@ const SessionModal = props => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header style={headerContainer}>
-        <h3 style={headerLabel}>{name}</h3>
-        <ul style={labelIconsContainer}>
-          <li style={labelIcons}>
-            <i class="fa fa-clock-o"></i>
-            <Moment format="LT">{startingTime}</Moment> {' - '}
-            <Moment format="LT">{endingTime}</Moment>
-          </li>
-          <li style={labelIcons}>
-            <i class="fa fa-map-marker"></i> {stage.name}
-          </li>
-        </ul>
-      </Modal.Header>
-      <Modal.Body>
-        <h6 style={speakersTitleLabel}>Session Speaker</h6>
-        <hr style={speakersSeperator}></hr>
-        {speakers.map(speakers => (
-          <label style={speakersLabel}>{speakers.name}</label>
-        ))}
-        <hr style={descriptionSeperator}></hr>
-        <label style={descriptionLabel}>{description}</label>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Done</Button>
-      </Modal.Footer>
+      <div key={_id}>
+        <Modal.Header style={headerContainer}>
+          <h3 style={headerLabel}>{name}</h3>
+          <ul style={labelIconsContainer}>
+            <li style={labelIcons}>
+              <i class="fa fa-clock-o"></i>
+              <Moment format="LT">{startingTime}</Moment> {' - '}
+              <Moment format="LT">{endingTime}</Moment>
+            </li>
+            <li style={labelIcons}>
+              <i class="fa fa-map-marker"></i> {stage.name}
+            </li>
+          </ul>
+        </Modal.Header>
+        <Modal.Body>
+          <h6 style={speakersTitleLabel}>Session Speaker</h6>
+          <hr style={speakersSeperator}></hr>
+          {speakers.map(speakers => (
+            <label style={speakersLabel}>{speakers.name}</label>
+          ))}
+          <hr style={descriptionSeperator}></hr>
+          <label style={descriptionLabel}>{description}</label>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Done</Button>
+        </Modal.Footer>
+      </div>
     </Modal>
   );
 };
