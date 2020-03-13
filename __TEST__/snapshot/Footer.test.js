@@ -1,10 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Footer from '../../src/components/layout/Footer';
-import App from '../../src/App';
-describe('App', () => {
-  test('snapshot renders', () => {
-    const component = renderer.create(<App />);
+describe('Footer', () => {
+  test('snapshot Footer', () => {
+    const component = renderer.create(<Footer />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

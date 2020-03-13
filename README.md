@@ -2,7 +2,9 @@
 
 ### `git clone https://github.com/Ov3rControl/front-end-task.git`
 
-### `yarn add`
+### `cd front-end-task`
+
+### `yarn install`
 
 ### `yarn start`
 
