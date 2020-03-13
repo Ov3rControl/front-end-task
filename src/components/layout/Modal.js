@@ -24,12 +24,12 @@ const SessionModal = props => {
           <h3 style={headerLabel}>{name}</h3>
           <ul style={labelIconsContainer}>
             <li style={labelIcons}>
-              <i class="fa fa-clock-o"></i>
+              <i className="fa fa-clock-o"></i>
               <Moment format="LT">{startingTime}</Moment> {' - '}
               <Moment format="LT">{endingTime}</Moment>
             </li>
             <li style={labelIcons}>
-              <i class="fa fa-map-marker"></i> {stage.name}
+              <i className="fa fa-map-marker"></i> {stage.name}
             </li>
           </ul>
         </Modal.Header>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardColumns, Card, Container } from 'react-bootstrap';
+import { Card, Container, Row, Col } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import SessionModal from './Modal';
@@ -7,7 +7,7 @@ export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
   const [sessionId, setSessionId] = React.useState([]);
   const sessionData = props.data.map(session => (
-    <div key={session._id}>
+    <Col md={3} key={session._id}>
       {/* eslint-disable-next-line */}
       <a
         style={{ cursor: 'pointer' }}
@@ -16,52 +16,54 @@ export const SessionCard = props => {
           setModalShow(true);
         }}
       >
-        <Card>
-          <div>
-            <Card.Img
-              variant="top"
-              src="https://pbs.twimg.com/profile_images/907567664465371136/7FwiQlFu.jpg"
-            />
-            <div style={stageTagContainer}>
-              <div style={stageTag}>
-                <label>{session.stage.name}</label>
-              </div>
-            </div>
-            <div style={dayTagContainer}>
-              <div style={dayTag}>
-                <label>
-                  <Moment format="D MMM YYYY">{session.day.name}</Moment>
-                </label>
-              </div>
-            </div>
-          </div>
-          <Card.Body>
-            <Card.Title>{session.name}</Card.Title>
-            <Card.Text style={speakersLabel}>
-              {session.speakers.map(speakers => speakers.name + ',')}
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer style={cardFooter}>
-            <label style={timeFeild}>
-              <Moment format="LT">{session.startingTime}</Moment> {' - '}
-              <Moment format="LT">{session.endingTime}</Moment>
-            </label>
-
-            <div style={tagContainer}>
-              {session.tags.map(tags => (
-                <div key={tags._id} style={tag}>
-                  <label>{tags.name}</label>
+        <Container style={{ marginTop: '5%' }}>
+          <Card>
+            <div>
+              <Card.Img
+                variant="top"
+                src="https://pbs.twimg.com/profile_images/907567664465371136/7FwiQlFu.jpg"
+              />
+              <div style={stageTagContainer}>
+                <div style={stageTag}>
+                  <label>{session.stage.name}</label>
                 </div>
-              ))}
+              </div>
+              <div style={dayTagContainer}>
+                <div style={dayTag}>
+                  <label>
+                    <Moment format="D MMM YYYY">{session.day.name}</Moment>
+                  </label>
+                </div>
+              </div>
             </div>
-          </Card.Footer>
-        </Card>
+            <Card.Body>
+              <Card.Title>{session.name}</Card.Title>
+              <Card.Text style={speakersLabel}>
+                {session.speakers.map(speakers => speakers.name + ',')}
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer style={cardFooter}>
+              <label style={timeFeild}>
+                <Moment format="LT">{session.startingTime}</Moment> {'  '}
+                <Moment format="LT">{session.endingTime}</Moment>
+              </label>
+
+              <div style={tagContainer}>
+                {session.tags.map(tags => (
+                  <div key={tags._id} style={tag}>
+                    <label>{tags.name}</label>
+                  </div>
+                ))}
+              </div>
+            </Card.Footer>
+          </Card>
+        </Container>
       </a>
-    </div>
+    </Col>
   ));
   return (
-    <CardColumns>
-      <Container>{sessionData}</Container>
+    <Row>
+      {sessionData}
       {modalShow && (
         <SessionModal
           show={modalShow}
@@ -69,28 +71,32 @@ export const SessionCard = props => {
           onHide={() => setModalShow(false)}
         />
       )}
-    </CardColumns>
+    </Row>
   );
 };
 const cardFooter = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  flexWrap: 'wrap',
   overflow: 'hidden'
 };
 const tag = {
+  display: 'flex',
+  alignItems: 'center',
   backgroundColor: 'pink',
   padding: 5,
   borderRadius: 4,
-  margin: '2%',
+  marginLeft: '1%',
+  marginRight: '1%',
   textAlign: 'center',
   fontWeight: 500,
   textTransform: 'uppercase'
 };
 const tagContainer = {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+  width: '100%'
 };
 const timeFeild = {
   alignSelf: 'center',
