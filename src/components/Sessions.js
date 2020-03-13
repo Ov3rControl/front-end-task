@@ -9,7 +9,16 @@ class Sessions extends Component {
     this.props.fetchSessions();
   }
   render() {
-    return <SessionCard data={this.props.sessions} />;
+    const { sessions } = this.props;
+    if (sessions.length) {
+      return <SessionCard data={sessions} />;
+    } else {
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <h1>Sorry There is No Sessions Available Now. Try Again Later</h1>
+        </div>
+      );
+    }
   }
 }
 Sessions.propTypes = {
