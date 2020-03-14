@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchSessions } from '../actions/sessionActions';
 import SessionCard from './layout/SessionCard';
+import AgendaTabs from './layout/AgendaTabs';
 
 class Sessions extends Component {
   componentDidMount() {
@@ -10,8 +11,15 @@ class Sessions extends Component {
   }
   render() {
     const { sessions } = this.props;
+    const days = sessions.map(days => days.day.name);
+    const uniqueDays = [...new Set(days)];
     if (sessions.length) {
-      return <SessionCard data={sessions} />;
+      return (
+        <div>
+          <AgendaTabs sessions={sessions} data={uniqueDays} />
+          <SessionCard data={sessions} />
+        </div>
+      );
     } else {
       return (
         <div style={{ textAlign: 'center' }}>
