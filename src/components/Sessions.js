@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchSessions } from '../actions/sessionActions';
-import SessionCard from './layout/SessionCard';
 import AgendaTabs from './layout/AgendaTabs';
 
 class Sessions extends Component {
@@ -17,7 +16,6 @@ class Sessions extends Component {
       return (
         <div>
           <AgendaTabs sessions={sessions} data={uniqueDays} />
-          <SessionCard data={sessions} />
         </div>
       );
     } else {

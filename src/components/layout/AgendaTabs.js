@@ -1,20 +1,24 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Moment from 'react-moment';
+import AgendaGrid from './AgendaGrid';
 
 const AgendaTabs = props => {
+  const initialDay = props.data[0];
   const [activeTab, setactiveTab] = React.useState(0);
+  const [activeDay, setActiveDay] = React.useState(initialDay);
   var filteredSessionsData = day =>
     props.sessions.filter(function(data) {
       return data.day.name === day;
     });
+
   const daysData = props.data.map((day, index) => (
     <Col style={activeTab === index ? activeTabStyle : tab}>
       {/* eslint-disable-next-line */}
       <a
         onClick={() => {
           setactiveTab(index);
-          console.log(filteredSessionsData(day));
+          setActiveDay(day);
         }}
       >
         <h3 style={dayLabel}>
@@ -24,7 +28,17 @@ const AgendaTabs = props => {
     </Col>
   ));
 
-  return <Row style={tabsContainer}>{daysData}</Row>;
+  return (
+    <div>
+      <Row style={tabsContainer}>{daysData}</Row>
+      <AgendaGrid
+        stageData={filteredSessionsData(activeDay).map(
+          stage => stage.stage.name
+        )}
+        data={filteredSessionsData(activeDay)}
+      />
+    </div>
+  );
 };
 const Colors = {
   tab: '#ccd8e7',
