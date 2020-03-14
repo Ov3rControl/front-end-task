@@ -23,18 +23,32 @@ export const SessionCard = props => {
                 variant="top"
                 src="https://pbs.twimg.com/profile_images/907567664465371136/7FwiQlFu.jpg"
               />
-              <div style={stageTagContainer}>
-                <div style={stageTag}>
-                  <label>{session.stage.name}</label>
-                </div>
-              </div>
-              <div style={dayTagContainer}>
-                <div style={dayTag}>
-                  <label>
-                    <Moment format="D MMM YYYY">{session.day.name}</Moment>
-                  </label>
-                </div>
-              </div>
+              {(() => {
+                try {
+                  return (
+                    <div style={stageTagContainer}>
+                      <div style={stageTag}>
+                        <label>{session.stage.name}</label>
+                      </div>
+                    </div>
+                  );
+                } catch (error) {}
+              })()}
+              {(() => {
+                try {
+                  return (
+                    <div style={dayTagContainer}>
+                      <div style={dayTag}>
+                        <label>
+                          <Moment format="D MMM YYYY">
+                            {session.day.name}
+                          </Moment>
+                        </label>
+                      </div>
+                    </div>
+                  );
+                } catch (error) {}
+              })()}
             </div>
             <Card.Body>
               <Card.Title>{session.name}</Card.Title>
