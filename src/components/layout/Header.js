@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
-function Header() {
+const Header = () => {
   return (
     <header>
       <Navbar style={navbar} fixed="top" variant="dark">
@@ -16,7 +16,7 @@ function Header() {
       </Navbar>
     </header>
   );
-}
+};
 const navbar = {
   background: 'rgba(0, 0, 0, 0.8)'
 };

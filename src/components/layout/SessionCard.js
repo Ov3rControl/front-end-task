@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import SessionModal from './Modal';
 export const SessionCard = props => {
   const [modalShow, setModalShow] = React.useState(false);
-  const [sessionId, setSessionId] = React.useState([]);
+  const [sessionId, setSessionId] = React.useState({});
   const sessionData = props.data.map(session => (
     <Col md={3} key={session._id}>
       {/* eslint-disable-next-line */}

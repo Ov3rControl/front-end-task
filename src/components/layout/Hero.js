@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-function Hero() {
+const Hero = () => {
   return (
     <Jumbotron fluid style={divStyle}>
       <div style={mainContainer}>
@@ -9,7 +9,7 @@ function Hero() {
       </div>
     </Jumbotron>
   );
-}
+};
 const divStyle = {
   height: 800,
   backgroundImage: `url('https://riseupsummit.com/static/media/HomepageHeader19blue.414fe687.jpg')`
