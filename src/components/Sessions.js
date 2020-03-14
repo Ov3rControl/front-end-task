@@ -27,7 +27,7 @@ Sessions.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  sessions: state.sessions.items
+  sessions: state.sessions.data
 });
 
 export default connect(mapStateToProps, { fetchSessions })(Sessions);
