@@ -3,61 +3,23 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import SessionModal from './Modal';
+import {
+  getSessionsDataByStage,
+  timeToPosition,
+  generateStageColor
+} from '../../utils';
 
 export const AgendaGrid = props => {
+  const sessionsData = props.sessionsData;
+  const stageData = props.stageData;
+
   const [modalShow, setModalShow] = React.useState(false);
   const [sessionId, setSessionId] = React.useState({});
-  const uniqueStages = [...new Set(props.stageData)];
 
-  var filteredSessionsDataBasedOnStage = stage =>
-    props.data.filter(function(data) {
-      return data.stage.name === stage;
-    });
-
-  const timeToPosition = date => {
-    let time = new Date(date);
-    let hour = time.getHours();
-    let min = time.getMinutes();
-    switch (hour) {
-      case 9:
-        return 100 + min * 6;
-      case 10:
-        return 460 + min * 6;
-      case 11:
-        return 660 + min * 6;
-      case 12:
-        return 840 + min * 6;
-      case 13:
-        return 1020 + min * 6;
-      case 14:
-        return 1200 + min * 6;
-      case 15:
-        return 1380 + min * 6;
-      case 16:
-        return 1560 + min * 6;
-      case 17:
-        return 1740 + min * 6;
-      case 18:
-        return 1920 + min * 6;
-      case 19:
-        return 2100 + min * 6;
-      case 20:
-        return 2180 + min * 6;
-      case 21:
-        return 2360 + min * 6;
-      case 22:
-        return 2540 + min * 6;
-      case 23:
-        return 2720 + min * 6;
-      case 24:
-        return 2900 + min * 6;
-      default:
-        break;
-    }
-  };
+  const uniqueStages = [...new Set(stageData)]; // Get unique stages togther so we can query the sessions data based on stage
 
   const sessionData = stageName =>
-    filteredSessionsDataBasedOnStage(stageName).map(session => (
+    getSessionsDataByStage(sessionsData, stageName).map(session => (
       <Col
         style={{
           position: 'absolute',
@@ -73,7 +35,7 @@ export const AgendaGrid = props => {
             setModalShow(true);
           }}
         >
-          <Container style={{ marginTop: '2%' }}>
+          <Container style={{ marginTop: '1%' }}>
             <Card>
               <Card.Body>
                 <Card.Title style={sessionTitle}>{session.name}</Card.Title>
@@ -100,25 +62,12 @@ export const AgendaGrid = props => {
         </a>
       </Col>
     ));
-  const generateColor = colorIndex => {
-    switch (colorIndex) {
-      case 0:
-        return '#fcdf33';
-      case 1:
-        return '#de0060';
-      case 2:
-        return '#003c86';
-      case 3:
-        return '#ccd8e7';
-      default:
-        return '#ccd8e7';
-    }
-  };
-  const stageData = uniqueStages.map((name, index) => (
+
+  const agendaGrid = uniqueStages.map((name, index) => (
     <Col>
       <Col
         style={{
-          backgroundColor: generateColor(index),
+          backgroundColor: generateStageColor(index),
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
@@ -135,7 +84,7 @@ export const AgendaGrid = props => {
 
   return (
     <div>
-      <Row style={agendaContainer}>{stageData}</Row>
+      <Row style={agendaContainer}>{agendaGrid}</Row>
       {modalShow && (
         <SessionModal
           show={modalShow}

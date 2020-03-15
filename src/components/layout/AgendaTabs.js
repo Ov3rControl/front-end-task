@@ -1,28 +1,30 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Moment from 'react-moment';
+
 import AgendaGrid from './AgendaGrid';
+import { getSessionsDataByDay } from '../../utils';
 
 const AgendaTabs = props => {
-  const initialDay = props.data[0];
+  const days = props.daysData;
+  const sessionsData = props.sessionsData;
+  const initialDay = days[0];
+
   const [activeTab, setactiveTab] = React.useState(0);
   const [activeDay, setActiveDay] = React.useState(initialDay);
-  var filteredSessionsData = day =>
-    props.sessions.filter(function(data) {
-      return data.day.name === day;
-    });
 
-  const daysData = props.data.map((day, index) => (
+  // Get single days to render agenda days tabs
+  const agendaTabs = days.map((day, index) => (
     <Col style={activeTab === index ? activeTabStyle : tab}>
       {/* eslint-disable-next-line */}
       <a
         onClick={() => {
-          setactiveTab(index);
-          setActiveDay(day);
+          setactiveTab(index); // Set the Currently Selected Tab
+          setActiveDay(day); // Set the Currently Selected Day
         }}
       >
         <h3 style={dayLabel}>
-          <Moment format="D MMM YYYY">{day}</Moment>
+          <Moment format="ddd D MMM">{day}</Moment>
         </h3>
       </a>
     </Col>
@@ -30,12 +32,12 @@ const AgendaTabs = props => {
 
   return (
     <div>
-      <Row style={tabsContainer}>{daysData}</Row>
+      <Row style={tabsContainer}>{agendaTabs}</Row>
       <AgendaGrid
-        stageData={filteredSessionsData(activeDay).map(
+        stageData={getSessionsDataByDay(sessionsData, activeDay).map(
           stage => stage.stage.name
         )}
-        data={filteredSessionsData(activeDay)}
+        sessionsData={getSessionsDataByDay(sessionsData, activeDay)}
       />
     </div>
   );

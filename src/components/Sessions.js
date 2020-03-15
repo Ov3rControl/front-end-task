@@ -11,11 +11,13 @@ class Sessions extends Component {
   render() {
     const { sessions } = this.props;
     const days = sessions.map(days => days.day.name);
-    const uniqueDays = [...new Set(days)];
+    const uniqueDays = [...new Set(days)]; // Get unique days togther so we can query the stages name data
+
     if (sessions.length) {
+      //Render the AgendaTabs Component if there are data fetched
       return (
         <div>
-          <AgendaTabs sessions={sessions} data={uniqueDays} />
+          <AgendaTabs sessionsData={sessions} daysData={uniqueDays} />
         </div>
       );
     } else {
