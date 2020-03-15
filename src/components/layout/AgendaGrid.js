@@ -24,33 +24,33 @@ export const AgendaGrid = props => {
       case 10:
         return 460 + min * 6;
       case 11:
-        return 640 + min * 6;
+        return 660 + min * 6;
       case 12:
-        return 820 + min * 6;
+        return 840 + min * 6;
       case 13:
-        return 1000 + min * 6;
+        return 1020 + min * 6;
       case 14:
-        return 1180 + min * 6;
+        return 1200 + min * 6;
       case 15:
-        return 1360 + min * 6;
+        return 1380 + min * 6;
       case 16:
-        return 1540 + min * 6;
+        return 1560 + min * 6;
       case 17:
-        return 1520 + min * 6;
+        return 1740 + min * 6;
       case 18:
-        return 720 + min * 6;
+        return 1920 + min * 6;
       case 19:
-        return 720 + min * 6;
+        return 2100 + min * 6;
       case 20:
-        return 720 + min * 6;
+        return 2180 + min * 6;
       case 21:
-        return 720 + min * 6;
+        return 2360 + min * 6;
       case 22:
-        return 720 + min * 6;
+        return 2540 + min * 6;
       case 23:
-        return 720 + min * 6;
+        return 2720 + min * 6;
       case 24:
-        return 720 + min * 6;
+        return 2900 + min * 6;
       default:
         break;
     }
@@ -100,9 +100,33 @@ export const AgendaGrid = props => {
         </a>
       </Col>
     ));
-  const stageData = uniqueStages.map(name => (
+  const generateColor = colorIndex => {
+    switch (colorIndex) {
+      case 0:
+        return '#fcdf33';
+      case 1:
+        return '#de0060';
+      case 2:
+        return '#003c86';
+      case 3:
+        return '#ccd8e7';
+      default:
+        return '#ccd8e7';
+    }
+  };
+  const stageData = uniqueStages.map((name, index) => (
     <Col>
-      <Col style={stageColumn}>
+      <Col
+        style={{
+          backgroundColor: generateColor(index),
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          height: 85,
+          color: 'white',
+          marginTop: '2%'
+        }}
+      >
         <h3>{name}</h3>
       </Col>
       <div>{sessionData(name)}</div>
@@ -156,19 +180,13 @@ const speakersLabel = {
   fontWeight: 600
 };
 const sessionTitle = {
+  fontSize: 15,
   fontWeight: 800,
   color: '#003c86'
 };
-const stageColumn = {
-  backgroundColor: '#003c86',
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  height: 85,
-  color: 'white',
-  marginTop: '2%'
-};
+
 const agendaContainer = {
-  minHeight: 3948
+  minHeight: 3048,
+  zoom: 0.75
 };
 export default AgendaGrid;
